@@ -234,6 +234,10 @@ cfg_if! {
     }
 }
 
+// ====================================== impl AsyncPeekExt ===================================== \\
+
+impl<P: AsyncPeek + ?Sized> AsyncPeekExt for P {}
+
 // ========================================= impl Future ======================================== \\
 
 impl<P: AsyncPeek + Unpin> Future for Peek<'_, P> {
