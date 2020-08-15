@@ -1,0 +1,41 @@
+[package]
+name = "async-peek"
+description = "Read data asynchronously without removing it from the queue"
+version = "0.0.0"
+homepage = "https://github.com/irrustible/async-peek"
+repository = "https://github.com/irrustible/async-peek"
+documentation = "https://docs.rs/async-peek"
+keywords = ["async", "io", "peek", "tcp", "udp"]
+categories = ["asynchronous", "network-programming"]
+readme = "README.md"
+license = "MPL-2.0"
+authors = ["Matthieu Le brazidec (r3v2d0g) <r3v2d0g@jesus.gg>"]
+edition = "2018"
+
+[dependencies]
+cfg-if = "0.1"
+ufut = "0.2"
+
+[dependencies.async-io]
+version = "0.1"
+optional = true
+default-features = false
+
+[dependencies.async-net]
+version = "0.1"
+optional = true
+default-features = false
+
+[dependencies.async-std]
+version = "1.6"
+optional = true
+default-features = false
+
+[dependencies.tokio]
+version = "0.2"
+optional = true
+default-features = false
+features = ["tcp", "udp"]
+
+[dev-dependencies]
+smol = "0.3"

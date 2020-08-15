@@ -1,0 +1,26 @@
+#+OPTIONS: toc:nil
+
+* Read data asynchronously without removing it from the queue
+[[https://github.com/r3v2d0g/async-peek/blob/main/LICENSE.txt][https://img.shields.io/crates/l/async-peek.svg]]
+[[https://crates.io/crates/async-peek][https://img.shields.io/crates/v/async-peek.svg]]
+[[https://docs.rs/async-peek][https://docs.rs/async-peek/badge.svg]]
+
+This crate provides a trait to read data asynchronously without removing it from the queue (like
+when using the blocking methods [[https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.peek][~std::net::TcpStream::peek()~]] and [[https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.peek][~std::net::UdpSocket::peek()~]]).
+
+** Support matrix
+|-------------------+-----+-----|
+| name              | tcp | udp |
+|-------------------+-----+-----|
+| ~smol~/~async-io~ | [x] | [x] |
+| ~async-net~       | [x] | [x] |
+| ~async-std~       | [x] | [ ] |
+| ~tokio~           | [x] | [ ] |
+|-------------------+-----+-----|
+
+** License
+#+BEGIN_QUOTE
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#+END_QUOTE
