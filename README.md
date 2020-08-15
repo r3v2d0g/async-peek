@@ -7,11 +7,12 @@ This crate provides a trait to read data asynchronously without removing it from
 
 ## Support matrix
 
-| name              | tcp | udp |
-| `smol~/~async-io` | [x] | [x] |
-| `async-net`       | [x] | [x] |
-| `async-std`       | [x] | [ ] |
-| `tokio`           | [x] | [ ] |
+| name                  | tcp | udp |
+|--------------------- |--- |--- |
+| `smol` and `async-io` | [x] | [x] |
+| `async-net`           | [x] | [x] |
+| `async-std`           | [x] | [ ] |
+| `tokio`               | [x] | [ ] |
 
 
 ## License

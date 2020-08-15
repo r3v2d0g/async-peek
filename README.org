@@ -9,14 +9,12 @@ This crate provides a trait to read data asynchronously without removing it from
 when using the blocking methods [[https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.peek][~std::net::TcpStream::peek()~]] and [[https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.peek][~std::net::UdpSocket::peek()~]]).
 
 ** Support matrix
-|-------------------+-----+-----|
-| name              | tcp | udp |
-|-------------------+-----+-----|
-| ~smol~/~async-io~ | [x] | [x] |
-| ~async-net~       | [x] | [x] |
-| ~async-std~       | [x] | [ ] |
-| ~tokio~           | [x] | [ ] |
-|-------------------+-----+-----|
+| name                  | tcp | udp |
+|-----------------------+-----+-----|
+| ~smol~ and ~async-io~ | [x] | [x] |
+| ~async-net~           | [x] | [x] |
+| ~async-std~           | [x] | [ ] |
+| ~tokio~               | [x] | [ ] |
 
 ** License
 #+BEGIN_QUOTE
