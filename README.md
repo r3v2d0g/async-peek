@@ -12,7 +12,6 @@ This crate provides a trait to read data asynchronously without removing it from
 | `smol` and `async-io` | [x] | [x] |
 | `async-net`           | [x] | [x] |
 | `async-std`           | [x] | [ ] |
-| `tokio`               | [x] | [ ] |
 
 
 ## License
