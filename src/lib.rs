@@ -88,6 +88,25 @@ pub struct Peek<'peek, P: ?Sized> {
     buf: &'peek mut [u8],
 }
 
+// ======================================== macro_rules! ======================================== \\
+
+macro_rules! impl_for_net {
+    ($net:ty) => {
+        impl AsyncPeek for $net {
+            fn poll_peek(
+                mut self: Pin<&mut Self>,
+                ctx: &mut Context,
+                buf: &mut [u8],
+            ) -> Poll<Result<usize, Error>> {
+                let fut = self.peek(buf);
+                ufut::pin!(fut);
+
+                fut.poll(ctx)
+            }
+        }
+    };
+}
+
 // ======================================= impl AsyncPeek ======================================= \\
 
 impl AsyncPeek for &[u8] {
@@ -143,94 +162,37 @@ where
     }
 }
 
+
+
 cfg_if! {
     if #[cfg(feature = "async-io")] {
-        impl AsyncPeek for async_io::Async<TcpStream> {
-            fn poll_peek(
-                mut self: Pin<&mut Self>,
-                ctx: &mut Context,
-                buf: &mut [u8],
-            ) -> Poll<Result<usize, Error>> {
-                let fut = self.peek(buf);
-                ufut::pin!(fut);
-
-                fut.poll(ctx)
-            }
-        }
-
-        impl AsyncPeek for async_io::Async<UdpSocket> {
-            fn poll_peek(
-                mut self: Pin<&mut Self>,
-                ctx: &mut Context,
-                buf: &mut [u8],
-            ) -> Poll<Result<usize, Error>> {
-                let fut = self.peek(buf);
-                ufut::pin!(fut);
-
-                fut.poll(ctx)
-            }
-        }
+        impl_for_net!(async_io::Async<TcpStream>);
+        impl_for_net!(async_io::Async<UdpSocket>);
+        impl_for_net!(&async_io::Async<TcpStream>);
+        impl_for_net!(&async_io::Async<UdpSocket>);
     }
 }
 
 cfg_if! {
     if #[cfg(feature = "async-net")] {
-        impl AsyncPeek for async_net::TcpStream {
-            fn poll_peek(
-                mut self: Pin<&mut Self>,
-                ctx: &mut Context,
-                buf: &mut [u8],
-            ) -> Poll<Result<usize, Error>> {
-                let fut = self.peek(buf);
-                ufut::pin!(fut);
-
-                fut.poll(ctx)
-            }
-        }
-
-        impl AsyncPeek for async_net::UdpSocket {
-            fn poll_peek(
-                mut self: Pin<&mut Self>,
-                ctx: &mut Context,
-                buf: &mut [u8],
-            ) -> Poll<Result<usize, Error>> {
-                let fut = self.peek(buf);
-                ufut::pin!(fut);
-
-                fut.poll(ctx)
-            }
-        }
+        impl_for_net!(async_net::TcpStream);
+        impl_for_net!(async_net::UdpSocket);
+        impl_for_net!(&async_net::TcpStream);
+        impl_for_net!(&async_net::UdpSocket);
     }
 }
 
 cfg_if! {
     if #[cfg(feature = "async-std")] {
-        impl AsyncPeek for async_std::net::TcpStream {
-            fn poll_peek(
-                mut self: Pin<&mut Self>,
-                ctx: &mut Context,
-                buf: &mut [u8],
-            ) -> Poll<Result<usize, Error>> {
-                let fut = self.peek(buf);
-                ufut::pin!(fut);
-
-                fut.poll(ctx)
-            }
-        }
+        impl_for_net!(async_std::net::TcpStream);
+        impl_for_net!(&async_std::net::TcpStream);
     }
 }
 
 cfg_if! {
     if #[cfg(feature = "tokio")] {
-        impl AsyncPeek for tokio::net::TcpStream {
-            fn poll_peek(
-                self: Pin<&mut Self>,
-                ctx: &mut Context,
-                buf: &mut [u8],
-            ) -> Poll<Result<usize, Error>> {
-                self.get_mut().poll_peek(ctx, buf)
-            }
-        }
+        impl_for_net!(tokio::net::TcpStream);
+        impl_for_net!(&tokio::net::TcpStream);
     }
 }
 
