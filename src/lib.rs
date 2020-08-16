@@ -147,7 +147,7 @@ cfg_if! {
     if #[cfg(feature = "async-io")] {
         impl AsyncPeek for async_io::Async<TcpStream> {
             fn poll_peek(
-                self: Pin<&mut Self>,
+                mut self: Pin<&mut Self>,
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {
@@ -160,7 +160,7 @@ cfg_if! {
 
         impl AsyncPeek for async_io::Async<UdpSocket> {
             fn poll_peek(
-                self: Pin<&mut Self>,
+                mut self: Pin<&mut Self>,
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {
@@ -177,7 +177,7 @@ cfg_if! {
     if #[cfg(feature = "async-net")] {
         impl AsyncPeek for async_net::TcpStream {
             fn poll_peek(
-                self: Pin<&mut Self>,
+                mut self: Pin<&mut Self>,
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {
@@ -190,7 +190,7 @@ cfg_if! {
 
         impl AsyncPeek for async_net::UdpSocket {
             fn poll_peek(
-                self: Pin<&mut Self>,
+                mut self: Pin<&mut Self>,
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {
@@ -207,7 +207,7 @@ cfg_if! {
     if #[cfg(feature = "async-std")] {
         impl AsyncPeek for async_std::net::TcpStream {
             fn poll_peek(
-                self: Pin<&mut Self>,
+                mut self: Pin<&mut Self>,
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {

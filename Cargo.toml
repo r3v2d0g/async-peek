@@ -29,7 +29,6 @@ default-features = false
 [dependencies.async-std]
 version = "1.6"
 optional = true
-default-features = false
 
 [dependencies.tokio]
 version = "0.2"
