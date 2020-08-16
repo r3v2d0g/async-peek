@@ -90,6 +90,7 @@ pub struct Peek<'peek, P: ?Sized> {
 
 // ======================================== macro_rules! ======================================== \\
 
+#[allow(unused)]
 macro_rules! impl_for_net {
     ($net:ty) => {
         impl AsyncPeek for $net {
