@@ -99,7 +99,7 @@ macro_rules! impl_for_net {
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {
-                let fut = self.peek(buf);
+                let fut = (&*self).peek(buf);
                 ufut::pin!(fut);
 
                 fut.poll(ctx)
@@ -190,13 +190,6 @@ cfg_if! {
     }
 }
 
-cfg_if! {
-    if #[cfg(feature = "tokio")] {
-        impl_for_net!(tokio::net::TcpStream);
-        impl_for_net!(&tokio::net::TcpStream);
-    }
-}
-
 // ====================================== impl AsyncPeekExt ===================================== \\
 
 impl<P: AsyncPeek + ?Sized> AsyncPeekExt for P {}
@@ -207,7 +200,14 @@ impl<P: AsyncPeek + Unpin> Future for Peek<'_, P> {
     type Output = Result<usize, Error>;
 
     fn poll(mut self: Pin<&mut Self>, ctx: &mut Context) -> Poll<Self::Output> {
+        dbg!();
         let this = &mut *self;
-        Pin::new(&mut this.peek).poll_peek(ctx, this.buf)
+        //let res = Pin::new(&mut this.peek).poll_peek(ctx, this.buf);
+        //dbg!(&res);
+        //res
+
+        let res = Pin::new(&mut this.peek).poll_peek(ctx, this.buf);
+
+        Poll::Ready(Ok(0))
     }
 }

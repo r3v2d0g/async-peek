@@ -14,7 +14,6 @@ when using the blocking methods [[https://doc.rust-lang.org/std/net/struct.TcpSt
 | ~smol~ and ~async-io~ | [x] | [x] |
 | ~async-net~           | [x] | [x] |
 | ~async-std~           | [x] | [ ] |
-| ~tokio~               | [x] | [ ] |
 
 ** License
 #+BEGIN_QUOTE
