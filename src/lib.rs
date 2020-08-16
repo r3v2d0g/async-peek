@@ -200,14 +200,7 @@ impl<P: AsyncPeek + Unpin> Future for Peek<'_, P> {
     type Output = Result<usize, Error>;
 
     fn poll(mut self: Pin<&mut Self>, ctx: &mut Context) -> Poll<Self::Output> {
-        dbg!();
         let this = &mut *self;
-        //let res = Pin::new(&mut this.peek).poll_peek(ctx, this.buf);
-        //dbg!(&res);
-        //res
-
-        let res = Pin::new(&mut this.peek).poll_peek(ctx, this.buf);
-
-        Poll::Ready(Ok(0))
+        Pin::new(&mut this.peek).poll_peek(ctx, this.buf)
     }
 }
