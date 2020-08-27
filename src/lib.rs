@@ -34,7 +34,7 @@ pub trait AsyncPeek {
     /// Returns the number of bytes read on success, or [`io::Error`] if an error is encountered.
     ///
     /// If no data is available, the current task is registered to be notified when data becomes
-    /// available or the stream is closed, and `Poll::Ready` is returned.
+    /// available or the stream is closed, and `Poll::Pending` is returned.
     ///
     /// [`io::Error`]: std::io::Error
     fn poll_peek(
