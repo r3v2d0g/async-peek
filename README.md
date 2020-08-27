@@ -5,15 +5,6 @@
 This crate provides a trait to read data asynchronously without removing it from the queue (like when using the blocking methods [`std::net::TcpStream::peek()`](https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.peek) and [`std::net::UdpSocket::peek()`](https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.peek)).
 
 
-## Support matrix
-
-| name                  | tcp | udp |
-|--------------------- |--- |--- |
-| `smol` and `async-io` | [x] | [x] |
-| `async-net`           | [x] | [x] |
-| `async-std`           | [x] | [ ] |
-
-
 ## License
 
 > This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <http://mozilla.org/MPL/2.0/>.

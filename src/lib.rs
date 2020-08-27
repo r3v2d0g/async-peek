@@ -95,7 +95,7 @@ macro_rules! impl_for_net {
     ($net:ty) => {
         impl AsyncPeek for $net {
             fn poll_peek(
-                mut self: Pin<&mut Self>,
+                self: Pin<&mut Self>,
                 ctx: &mut Context,
                 buf: &mut [u8],
             ) -> Poll<Result<usize, Error>> {
@@ -180,13 +180,6 @@ cfg_if! {
         impl_for_net!(async_net::UdpSocket);
         impl_for_net!(&async_net::TcpStream);
         impl_for_net!(&async_net::UdpSocket);
-    }
-}
-
-cfg_if! {
-    if #[cfg(feature = "async-std")] {
-        impl_for_net!(async_std::net::TcpStream);
-        impl_for_net!(&async_std::net::TcpStream);
     }
 }
 

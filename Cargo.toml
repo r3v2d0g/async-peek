@@ -26,9 +26,5 @@ version = "0.1"
 optional = true
 default-features = false
 
-[dependencies.async-std]
-version = "1.6"
-optional = true
-
 [dev-dependencies]
 smol = "0.3"
