@@ -14,7 +14,7 @@ edition = "2018"
 
 [dependencies]
 cfg-if = "0.1"
-ufut = "0.2"
+ufut = "0.3"
 
 [dependencies.async-io]
 version = "0.2"
